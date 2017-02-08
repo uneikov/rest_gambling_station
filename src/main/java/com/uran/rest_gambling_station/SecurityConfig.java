@@ -1,5 +1,6 @@
 package com.uran.rest_gambling_station;
 
+import com.uran.rest_gambling_station.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,8 +22,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     
     @Autowired
+    private UserService userService;
+    
+    @Autowired
     public void ConfigureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
+        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
+                //jdbcAuthentication()
+                //.dataSource(dataSource)
+        
+                
     }
     
     protected void configure(HttpSecurity http) throws Exception {

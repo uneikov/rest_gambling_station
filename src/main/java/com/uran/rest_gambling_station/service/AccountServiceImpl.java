@@ -20,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
     }
     
     @Override
-    public Account debitUserAccount(long userId, double value) {
+    public Account debitUserAccount(final long userId, final double value) {
        //if (value < 0.0) throw new NegativeValueException();
        final Account account = this.repository.findByUserId(userId);
        account.setBalance(account.getBalance() - value);
@@ -28,21 +28,21 @@ public class AccountServiceImpl implements AccountService {
     }
     
     @Override
-    public Account creditUserAccount(long userId, double value) {
+    public Account creditUserAccount(final long userId, final double value) {
         final Account account = this.repository.findByUserId(userId);
         account.setBalance(account.getBalance() + value);
         return this.repository.save(account);
     }
     
     @Override
-    public Account debitStationAccount(double value) {
+    public Account debitStationAccount(final double value) {
         final Account account = this.repository.findByUserId(getStationId());
         account.setBalance(account.getBalance() - value);
         return this.repository.save(account);
     }
     
     @Override
-    public Account creditStationAccount(double value) {
+    public Account creditStationAccount(final double value) {
         final Account account = this.repository.findByUserId(getStationId());
         account.setBalance(account.getBalance() + value);
         return this.repository.save(account);
@@ -55,7 +55,7 @@ public class AccountServiceImpl implements AccountService {
     }
     
     @Override
-    public void transferToStation(long userId, double value) {
+    public void transferToStation(final long userId, final double value) {
         debitUserAccount(userId, value);
         creditStationAccount(value);
     }

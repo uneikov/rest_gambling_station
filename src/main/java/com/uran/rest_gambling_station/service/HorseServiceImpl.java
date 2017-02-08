@@ -13,12 +13,12 @@ public class HorseServiceImpl implements HorseService {
     private HorseRepository repository;
     
     @Override
-    public Page<Horse> findAll(Pageable pageable) {
+    public Page<Horse> findAll(final Pageable pageable) {
         return this.repository.findAll(pageable);
     }
     
     @Override
-    public Horse findById(long id) {
+    public Horse findById(final long id) {
         return this.repository.findOne(id);
     }
 }

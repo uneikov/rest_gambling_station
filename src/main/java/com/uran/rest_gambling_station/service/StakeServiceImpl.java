@@ -19,27 +19,27 @@ public class StakeServiceImpl implements StakeService{
     }
     
     @Override
-    public Stake findById(long id) {
+    public Stake findById(final long id) {
         return this.repository.findOne(id);
     }
     
     @Override
-    public Page<Stake> findAllByRaceId(long id, Pageable pageable) {
+    public Page<Stake> findAllByRaceId(final long id, final Pageable pageable) {
         return this.repository.findByRaceId(id, pageable);
     }
     
     @Override
-    public Page<Stake> findAllByUserId(long id, Pageable pageable) {
+    public Page<Stake> findAllByUserId(final long id, final Pageable pageable) {
         return this.repository.findByUserId(id, pageable);
     }
     
     @Override
-    public Stake addStake(Stake stake) {
+    public Stake addStake(final Stake stake) {
         return repository.save(stake);
     }
     
     @Override
-    public void delete(long id) {
+    public void delete(final long id) {
         repository.delete(id);
     }
     
