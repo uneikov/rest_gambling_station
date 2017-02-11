@@ -53,8 +53,7 @@ public class HorseRestController {
     
     @GetMapping(value = "/names", produces = APPLICATION_JSON_UTF8_VALUE)
     public List<String> getAllReadyForRaceHorsesNamesAsList() {
-        return this.horseService.findAll().stream()
-                .filter(Horse::isReady)
+        return this.horseService.findByReadyTrue().stream()
                 .map(Horse::getName)
                 .collect(Collectors.toList());
     }

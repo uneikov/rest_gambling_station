@@ -53,4 +53,9 @@ public class HorseServiceImpl implements HorseService {
         Horse horse = updateFromTo(this.repository.findOne(horseDto.getId()), horseDto);
         return this.repository.save(horse);
     }
+    
+    @Override
+    public List<Horse> findByReadyTrue() {
+        return this.repository.findByReadyTrue();
+    }
 }

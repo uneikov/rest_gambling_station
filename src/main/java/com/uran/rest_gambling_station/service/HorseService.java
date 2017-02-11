@@ -16,4 +16,5 @@ public interface HorseService {
     Horse save(Horse horse);
     Horse update(Horse horse);
     Horse update(HorseDto horseDto);
+    List<Horse> findByReadyTrue();
 }
