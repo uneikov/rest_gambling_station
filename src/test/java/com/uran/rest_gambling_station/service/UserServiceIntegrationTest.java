@@ -23,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class UserServiceIntegrationTest {
     @Autowired
     private UserRepository repository;
@@ -60,7 +61,6 @@ public class UserServiceIntegrationTest {
     }
     
     @Test
-    @Transactional
     public void shouldUpdateUserRoles() {
         User user = this.repository.findByEmailIgnoringCase("admin@gmail.com");
         assertThat(user.getRoles()).containsExactly(Role.ROLE_ADMIN);

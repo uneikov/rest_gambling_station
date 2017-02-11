@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 //@DataJpaTest
 //@AutoConfigureTestDatabase(connection = H2)
 public class StakeServiceIntegrationTest {
@@ -37,7 +38,6 @@ public class StakeServiceIntegrationTest {
     }
     
     @Test
-    @Transactional
     public void shouldDeleteOneStake() {
         this.repository.delete(1L);
         Page<Stake> page = this.repository.findAll(new PageRequest(0, 10));
@@ -57,7 +57,12 @@ public class StakeServiceIntegrationTest {
     }
     
     @Test
-    @Transactional
+    public void shouldReturnStakeByRaceIdAndUserId() {
+        Page<Stake> page = this.repository.findByRaceIdAndUserId(4L, 1L, new PageRequest(0, 10));
+        assertThat(page.getContent().size()).isEqualTo(1);
+    }
+    
+    @Test
     public void shouldSaveStake() {
         final Page<Stake> page0 = this.repository.findByRaceId(4L, new PageRequest(0, 10));
         this.repository.save(getCreated());
@@ -67,7 +72,6 @@ public class StakeServiceIntegrationTest {
     }
     
     @Test
-    @Transactional
     public void shouldSaveStakesList() {
         this.repository.save(Arrays.asList(getCreated(), getCreatedMore()));
         final Page<Stake> page = this.repository.findByRaceId(4L, new PageRequest(0, 10));

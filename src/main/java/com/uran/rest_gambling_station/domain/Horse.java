@@ -1,6 +1,7 @@
 package com.uran.rest_gambling_station.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 
 @Entity
 @ToString(exclude="id")
+@NoArgsConstructor
 @Table(name = "horses", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id"),
         @UniqueConstraint(columnNames = "name") })
@@ -25,25 +27,22 @@ public class Horse implements Serializable{
     @NotEmpty
     @NaturalId
     @Column(nullable = false)
-    private @Setter String name;
+    private String name;
     
     @NotEmpty
     @Column(nullable = false)
-    private @Setter @Getter String ruName;
+    private String ruName;
     
     @Digits(fraction = 0, integer = 2)
     @Column(nullable = false)
-    private @Setter @Getter int age;
+    private int age;
     
     @Digits(fraction = 0, integer = 4)
     @Column(nullable = false)
-    private @Setter @Getter int wins;
+    private int wins;
     
     @Column(nullable = false)
-    private @Setter @Getter boolean ready;
-    
-    public Horse() {
-    }
+    private boolean ready;
     
     public Horse(String name, String ruName, int age, int wins) {
         this(null, name, ruName, age, wins);
@@ -67,7 +66,43 @@ public class Horse implements Serializable{
         this.ready = ready;
     }
     
+    public boolean isReady() {
+        return ready;
+    }
+    
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getRuName() {
+        return ruName;
+    }
+    
+    public void setRuName(String ruName) {
+        this.ruName = ruName;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+    
+    public void setAge(int age) {
+        this.age = age;
+    }
+    
     public String getName() {
         return name;
+    }
+    
+    public int getWins() {
+        return wins;
+    }
+    
+    public void setWins(int wins) {
+        this.wins = wins;
     }
 }

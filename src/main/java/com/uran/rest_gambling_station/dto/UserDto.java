@@ -1,5 +1,7 @@
 package com.uran.rest_gambling_station.dto;
 
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -7,6 +9,8 @@ import org.hibernate.validator.constraints.SafeHtml;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+@ToString(exclude="id")
+@NoArgsConstructor
 public class UserDto implements Serializable {
     private static final long serialVersionUID = -6600159339406192957L;
     
@@ -24,9 +28,6 @@ public class UserDto implements Serializable {
     @Size(min = 5, max = 64, message = " must between 5 and 64 characters")
     @SafeHtml
     private String password;
-    
-    public UserDto() {
-    }
     
     public UserDto(Long id, String name, String email, String password) {
         this.id = id;
@@ -71,12 +72,4 @@ public class UserDto implements Serializable {
         return id == null;
     }
     
-    @Override
-    public String toString() {
-        return "UserDTO{"
-                + "id=" + id +
-                ", name='" + name + '\''
-                + ", email='" + email + '\''
-                + '}';
-    }
 }

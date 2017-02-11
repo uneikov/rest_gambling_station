@@ -1,6 +1,7 @@
 package com.uran.rest_gambling_station.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,25 +27,25 @@ public class User implements Serializable{
     
     @Id
     @GeneratedValue
-    private @Setter Long id;
+    private Long id;
     
     @Column(nullable = false)
     @NotEmpty
-    private @Setter String name;
+    private String name;
     
     @Column(unique = true, nullable = false)
     @NaturalId
     @NotEmpty
     @Email
-    private @Setter String email;
+    private String email;
     
     @Column(nullable = false)
     @NotEmpty
     @Length(min = 5)
-    private @Setter String password;
+    private String password;
     
     @Column(nullable = false)
-    private @Setter boolean enabled = true;
+    private boolean enabled = true;
     
     @Column(columnDefinition = "timestamp default now()")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -61,6 +62,7 @@ public class User implements Serializable{
     private @Setter List<Stake> stakes;
     
     @OneToOne(mappedBy = "user", optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Account account;
     
     public User() {
@@ -82,6 +84,14 @@ public class User implements Serializable{
         this.enabled = enabled;
         this.account = account;
         setRoles(roles);
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
     
     public Account getAccount() {

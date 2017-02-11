@@ -11,6 +11,20 @@
 	<name>rest_gambling_station</name>
 	<description>REST gamblingstation realisation</description>
 
+	<developers>
+		<developer>
+			<id>uneikov</id>
+			<name>Iouri Neikov</name>
+			<email>neikov@gmail.com</email>
+		</developer>
+	</developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/uneikov/rest_gambling_station</connection>
+        <developerConnection>scm:git:git://github.com/uneikov/rest_gambling_station</developerConnection>
+        <url>https://github.com/uneikov/rest_gambling_station</url>
+    </scm>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

@@ -13,4 +13,6 @@ public interface StakeRepository extends JpaRepository<Stake, Long> {
     
     Page<Stake> findByRaceId(long id, Pageable pageable);
     
+    Page<Stake> findByRaceIdAndUserId(long raceId, long userId, Pageable pageable);
+    
 }

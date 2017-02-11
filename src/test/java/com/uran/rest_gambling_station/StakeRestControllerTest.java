@@ -78,6 +78,16 @@ public class StakeRestControllerTest {
     
     @Test
     @WithMockUser(username = "User1", password = "password1", roles = "USER")
+    public void shouldReturnStakesForRaceIdAndUserId() throws Exception {
+        this.mockMvc.perform(get("/race/1/stakes/1"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().json(mapper.writeValueAsString(Collections.singletonList(STAKE_1)), true));
+    }
+    
+    @Test
+    @WithMockUser(username = "User1", password = "password1", roles = "USER")
     public void shouldReturnAllStakes() throws Exception {
         this.mockMvc.perform(get("/stakes"))
                 .andDo(print())

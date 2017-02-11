@@ -1,8 +1,10 @@
 package com.uran.rest_gambling_station.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,12 +12,15 @@ import java.io.Serializable;
 @Entity
 @ToString(exclude={"id", "user"})
 @Table(name = "accounts")
+@NoArgsConstructor
 public class Account implements Serializable{
     private static final long serialVersionUID = -6091983356638366235L;
+    
     @Id
     @GeneratedValue
     private @Setter @Getter Long id;
     
+    @NotEmpty(message = "Card number is required.")
     @Column
     private @Setter @Getter String cardNumber;
     
@@ -24,9 +29,6 @@ public class Account implements Serializable{
     
     @OneToOne(optional = false)
     private @Setter User user;
-    
-    public Account() {
-    }
     
     public Account(String cardNumber, Double balance, User user) {
         this.cardNumber = cardNumber;
