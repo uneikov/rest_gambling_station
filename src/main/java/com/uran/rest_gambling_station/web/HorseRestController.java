@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
@@ -52,10 +53,12 @@ public class HorseRestController {
     }
     
     @GetMapping(value = "/names", produces = APPLICATION_JSON_UTF8_VALUE)
-    public List<String> getAllReadyForRaceHorsesNamesAsList() {
-        return this.horseService.findByReadyTrue().stream()
+    public Map<String, String> getAllReadyForRaceHorsesNamesAsString() {
+        return this.horseService.findByReadyTrue().stream().collect(Collectors.toMap(Horse::getName, Horse::getRuName));
+        //return HorseUtil.getSerialized(this.horseService.findByReadyTrue());
+        /*return this.horseService.findByReadyTrue().stream()
                 .map(Horse::getName)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
     }
 }
 
